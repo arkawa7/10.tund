@@ -122,7 +122,9 @@ class InterestsManager {
 	function getUserInterest(){
 		$html = '';
 		
-		$stmt = $this->connection->prepare(" user_id = ?");
+		$stmt = $this->connection->prepare(" SELECT interests.name FROM user_interests INNER JOIN interests ON user_interests.interests_id = interests_id WHERE
+		user_interests.user_id = ?
+		");
 		$stmt->bind_param("i", $this->user_id);
 		$stmt->bind_result($name);
 		$stmt->execute();
